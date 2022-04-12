@@ -1,4 +1,3 @@
-# Step 1
 
-## Test to run sa command
+## Test to run a command
 `printf 'Hello, world!\n\n'`{{execute}}
