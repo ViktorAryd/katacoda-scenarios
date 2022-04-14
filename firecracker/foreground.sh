@@ -1,1 +1,1 @@
-apt install cpu-checker
+echo Y | apt install cpu-checker
