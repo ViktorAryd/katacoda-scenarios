@@ -6,11 +6,11 @@
 	"details": {
 		"steps": [
 			{
-				"title": "Steo 0",
+				"title": "Step 0: This will probably be the most frustrating step, blame Katacoda",
 				"text": "step0.md"
 			},
 			{
-				"title": "Step 1",
+				"title": "Step 1: Time to get started for real!",
 				"text": "step1.md"
 			},
 			{
