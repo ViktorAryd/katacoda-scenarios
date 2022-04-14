@@ -1,31 +1,35 @@
 {
-  "title": "Setting Up and Using Firecracker",
-  "description": "A beginners guide to the serverless tool Firecracker",
-  "difficulty": "Beginner",
-  "time": "x minutes",
-  "details": {
-    "steps": [
-      {
-        "title": "Step 1",
-        "text": "step1.md"
-      },
-      {
-        "title": "Step 2",
-        "text": "step2.md"
-      }
-    ],
-    "intro": {
-      "text": "intro.md",
-      "code": "foreground.sh"
-    },
-    "finish": {
-      "text": "finish.md"
-    }
-  },
-  "environment": {
-    "uilayout": "terminal"
-  },
-  "backend": {
-    "imageid": "ubuntu:2004"
-  }
+	"title": "Setting Up and Using Firecracker",
+	"description": "A beginners guide to the serverless tool Firecracker",
+	"difficulty": "Beginner",
+	"time": "x minutes",
+	"details": {
+		"steps": [
+			{
+				"title": "Steo 0",
+				"text": "step0.md"
+			},
+			{
+				"title": "Step 1",
+				"text": "step1.md"
+			},
+			{
+				"title": "Step 2",
+				"text": "step2.md"
+			}
+		],
+		"intro": {
+			"text": "intro.md",
+			"code": "foreground.sh"
+		},
+		"finish": {
+			"text": "finish.md"
+		}
+	},
+	"environment": {
+		"uilayout": "terminal"
+	},
+	"backend": {
+		"imageid": "ubuntu:2004"
+	}
 }
