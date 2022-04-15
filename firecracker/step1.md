@@ -12,7 +12,7 @@ curl -L ${release_url}/download/${latest}/firecracker-${latest}-${arch}.tgz \
 
 Rename the binary and move it to the root folder for the next step in the tutorial:
 
-`mv release-${latest}-$(uname -m/firecracker-${latest}-$(uname -m) Firecracker`
+`mv release-${latest}-$(uname -m)/firecracker-${latest}-$(uname -m) Firecracker`{{Execute}}
 
 ### Option 2: Clone Repo and Build Binary (4-5 min)
 This process takes a while, so this is mainly recommended if you intend to contribute to the project yourself, or want to explore the project more thoroughly.
@@ -22,10 +22,8 @@ First, clone the Firecracker Repository
 
 Navigate to the firecracker root directory and build the binary:
 
-`cd firecracker
-echo y | tools/devtool build
-cd ..`{{Execute}}
+`tools/devtool build`{{Execute}}
 
-The firecracker binary can be found under   `firecracker/build/cargo_target/x86_64-unknown-linux-musl/debug/` Move it to the root folder and rename it for the next step of the tutorial:
+The firecracker binary can be found under   `firecracker/build/cargo_target/x86_64-unknown-linux-musl/debug/` Navigate to the root folder, then move it there and rename it for the next step of the tutorial:
 
 `mv firecracker/build/cargo_target/x86_64-unknown-linux-musl/debug/firecracker Firecracker`{{Execute}}
