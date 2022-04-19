@@ -18,7 +18,7 @@ curl -fsSL -o "hello-vmlinux.bin" "${url}/kernels/vmlinux.bin"
 curl -fsSL -o "hello-rootfs.ext4" "${url}/rootfs/bionic.rootfs.ext4"``{{Execute}}
 
 
-Then we send a HTTP PUT request to the socket file we created in the last step. This request contains the path to the kernel we just downloaded, as well as some other parameters:
+Then we send a HTTP PUT request to the socket file we created in the last step. This request contains the path to the kernel we just downloaded:
 
 `path=$(pwd)"/hello-vmlinux.bin"
 curl --unix-socket ./firecracker.socket -i \
@@ -31,7 +31,7 @@ curl --unix-socket ./firecracker.socket -i \
    }"`{{Execute}}
 
 
-You should recieve a 204 success response from the microVM, indicating everything went as expected. A similar HTTP request is then required containing the path to the root file system:
+You should recieve a 204 success response, indicating everything went as expected. A similar HTTP request is then required containing the path to the root file system:
 
 `path=$(pwd)"/hello-rootfs.ext4"
 curl --unix-socket ./firecracker.socket -i \
@@ -56,6 +56,6 @@ Another 204 response tells us that the Firecracker microVM is configured and rea
       "action_type": "InstanceStart"
    }'`{{Execute}}
 
-When running this command, you should receive one last 204 response, and text should start appearing in the first terminal window. If you instead recieve an empty response from the server, and find the error message 'Error creating the Kvm object' in the first terminal, then kvm is probably not supported in your environment. If you're running the tutorial on katacoda, you probably didn't pay enough attention to step one. If running it locally, it might have to do with kvm permissions, and could be fixable. 
+When running this command, you should receive one last 204 response, and text should start appearing in the first terminal window. If you instead recieve an empty response, and find an error message in the first terminal, then kvm is probably not supported in your environment. If you're running on katacoda, take another look at step one. If running locally, it might have to do with kvm permissions. 
 
 Assuming you did recieve a 204 response, the mivroVM should now be up and running and ready to use!
