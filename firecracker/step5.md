@@ -6,8 +6,8 @@ One thing to at least mention is the Jailer binary. This can be found in the sam
 
 Now all that remains is to shut the microVM down. We do this with another HTTP request:
 
-curl --unix-socket ./firecracker.socket -i \
+`curl --unix-socket ./firecracker.socket -i \
     -X PUT "http://localhost/actions" \
-    -d '{ "action_type": "SendCtrlAltDel" }'
+    -d '{ "action_type": "SendCtrlAltDel" }'`{{Execute}}
 
 Remember to delete the socket file if you want to relaunch Firecracker. Normally this file should be placed in the /tmp directory.
