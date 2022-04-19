@@ -9,44 +9,44 @@ Now Firecracker should be running, and to continue we need to open a second term
 `pwd
 ls`{{Execute}}
 
-## (WIP) Commands to Configure & Start VM
+## Commands to Configure & Start VM
 
-Downloading linux kernel and root file system:
+Firecracker needs a separate linux kernel and root file system to function. To ensure compatability, we use the files provided by AWS in the set up instructions for Firecracker (This takes a few seconds):
 
 ``url="s3.amazonaws.com/spec.ccfc.min/img/quickstart_guide/`uname -m`"
 curl -fsSL -o "hello-vmlinux.bin" "${url}/kernels/vmlinux.bin"
 curl -fsSL -o "hello-rootfs.ext4" "${url}/rootfs/bionic.rootfs.ext4"``{{Execute}}
 
 
-HTTP put request to socket file containing path to Linux kernel we just downloaded.
+Then we send a HTTP PUT request to the socket file we created in the last step. This request contains the path to the kernel we just downloaded:
 
-`kernel_path=$(pwd)"/hello-vmlinux.bin"
+`path=$(pwd)"/hello-vmlinux.bin"
 curl --unix-socket ./firecracker.socket -i \
   -X PUT 'http://localhost/boot-source'   \
   -H 'Accept: application/json'           \
   -H 'Content-Type: application/json'     \
   -d "{
-        \"kernel_image_path\": \"${kernel_path}\",
+        \"kernel_image_path\": \"${path}\",
         \"boot_args\": \"console=ttyS0 reboot=k panic=1 pci=off\"
    }"`{{Execute}}
 
 
-HTTP put request to socket file containing path to root file system we just downloaded.
+You should recieve a 204 success response, indicating everything went as expected. A similar HTTP request is then required containing the path to the root file system:
 
-`rootfs_path=$(pwd)"/hello-rootfs.ext4"
+`path=$(pwd)"/hello-rootfs.ext4"
 curl --unix-socket ./firecracker.socket -i \
   -X PUT 'http://localhost/drives/rootfs' \
   -H 'Accept: application/json'           \
   -H 'Content-Type: application/json'     \
   -d "{
         \"drive_id\": \"rootfs\",
-        \"path_on_host\": \"${rootfs_path}\",
+        \"path_on_host\": \"${path}\",
         \"is_root_device\": true,
         \"is_read_only\": false
    }"`{{Execute}}
 
 
-HTTP put request to start Firecracker VM.
+Another 204 response tells us that the Firecracker microVM is configured and ready to start. We start it by sending one last HTTP request containing the API-command "InstanceStart":
 
 `curl --unix-socket ./firecracker.socket -i \
   -X PUT 'http://localhost/actions'       \
@@ -55,3 +55,7 @@ HTTP put request to start Firecracker VM.
   -d '{
       "action_type": "InstanceStart"
    }'`{{Execute}}
+
+When running this command, you should receive one last 204 response, and text should start appearing in the first terminal window. If you instead recieve an empty response, and find an error message in the first terminal, then kvm is probably not supported in your environment. If you're running on katacoda, take another look at step one. If running locally, it might have to do with kvm permissions. 
+
+Assuming you did recieve a 204 response, the mivroVM should now be up and running and ready to use!
