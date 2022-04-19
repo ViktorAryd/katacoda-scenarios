@@ -14,11 +14,11 @@
 				"text": "step2.md"
 			},
 			{
-				"title": "Step 3: Starting the Firecracker microVM",
+				"title": "Step 3: Setting up the Firecracker microVM",
 				"text": "step3.md"
 			},
 			{
-				"title": "Step 4: Communicating with the microVM",
+				"title": "Step 4: Starting up the microVM, communicating and running a workload",
 				"text": "step4.md"
 			},
 			{
