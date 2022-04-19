@@ -9,7 +9,7 @@ Now Firecracker should be running, and to continue we need to open a second term
 `pwd
 ls`{{Execute}}
 
-## Commands to Configure & Start VM
+## Configuration needed to launch microVM 
 
 Firecracker needs a separate linux kernel and root file system to function. To ensure compatability, we use the files provided by AWS in the set up instructions for Firecracker (This takes a few seconds):
 
