@@ -11,7 +11,7 @@ ls`{{Execute}}
 
 ## Configuration needed to launch microVM 
 
-Firecracker needs a separate linux kernel and root file system to function. To ensure compatability, we use the files provided by AWS in the set up instructions for Firecracker (This takes a few seconds):
+Firecracker needs a separate linux kernel and root file system to function. To ensure compatibility, we use the files provided by AWS in the set up instructions for Firecracker (This takes a few seconds):
 
 ``url="s3.amazonaws.com/spec.ccfc.min/img/quickstart_guide/`uname -m`"
 curl -fsSL -o "hello-vmlinux.bin" "${url}/kernels/vmlinux.bin"
@@ -31,7 +31,7 @@ curl --unix-socket ./firecracker.socket -i \
    }"`{{Execute}}
 
 
-You should recieve a 204 success response, indicating everything went as expected. A similar HTTP request is then required containing the path to the root file system:
+You should receive a 204 success response, indicating everything went as expected. A similar HTTP request is then required containing the path to the root file system:
 
 `path=$(pwd)"/hello-rootfs.ext4"
 curl --unix-socket ./firecracker.socket -i \

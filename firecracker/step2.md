@@ -1,4 +1,4 @@
-First off, we need to get Fireracker itself. We can do this in one of two ways. Either we get the binary itself, or clone the entire git repository and build the binary ourselves. To continue, complete one of these options and then move to step 3.
+First off, we need to get Firecracker itself. We can do this in one of two ways. Either we get the binary itself, or clone the entire git repository and build the binary ourselves. To continue, complete one of these options and then move to step 3.
 
 ### Option 1: Get Binary (1 min)
 
