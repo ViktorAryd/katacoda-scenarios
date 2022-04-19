@@ -6,24 +6,24 @@
 	"details": {
 		"steps": [
 			{
-				"title": "Step 0: This might be the most frustrating step, blame Katacoda",
-				"text": "step0.md"
-			},
-			{
-				"title": "Step 1: Time to get started for real!",
+				"title": "Step 1: This might be the most frustrating step, blame Katacoda",
 				"text": "step1.md"
 			},
 			{
-				"title": "Step 2: Starting the Firecracker microVM",
+				"title": "Step 2: Time to get started for real!",
 				"text": "step2.md"
 			},
 			{
-				"title": "Step 3: Communicating with the microVM",
+				"title": "Step 3: Starting the Firecracker microVM",
 				"text": "step3.md"
 			},
 			{
-				"title": "Step 4: More about Firecracker and the Jailer binary",
+				"title": "Step 4: Communicating with the microVM",
 				"text": "step4.md"
+			},
+			{
+				"title": "Step 5: More about Firecracker and the Jailer binary",
+				"text": "step5.md"
 			}
 		],
 		"intro": {

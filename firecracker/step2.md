@@ -1,57 +1,29 @@
-Now it's time to actually start Firecracker itself. To do this, we first need to run the binary we just downloaded:
+First off, we need to get Fireracker itself. We can do this in one of two ways. Either we get the binary itself, or clone the entire git repository and build the binary ourselves. To continue, complete one of these options and then move to step 3.
 
-`./Firecracker --api-sock ./firecracker.socket`{{Execute}}
+### Option 1: Get Binary (1 min)
 
-The argument provided specifies where to place the socket file, which we will soon use to communicate with the microVM.
+Use the following command to get the complete binary:
 
-Now Firecracker should be running, and to continue we need to open a second terminal window. In this new terminal window, make sure you're in the root folder, and that you can see the binary and the socket file.
+``url="https://github.com/firecracker-microvm/firecracker/releases"
+latest=$(basename $(curl -fsSLI -o /dev/null -w  %{url_effective} ${url}/latest))
+arch=`uname -m`
+curl -L ${url}/download/${latest}/firecracker-${latest}-${arch}.tgz \
+| tar -xz``{{Execute}}
 
-`pwd
-ls`{{Execute}}
+Rename the binary and move it to the root folder for the next step in the tutorial:
 
-## (WIP) Commands to Configure & Start VM
+`mv release-${latest}-$(uname -m)/firecracker-${latest}-$(uname -m) Firecracker`{{Execute}}
 
-Downloading linux kernel and root file system:
+### Option 2: Clone Repo and Build Binary (4-5 min)
+This process takes a while, so this is mainly recommended if you intend to contribute to the project yourself, or want to explore the project more thoroughly.
 
-``url="s3.amazonaws.com/spec.ccfc.min/img/quickstart_guide/`uname -m`"
-curl -fsSL -o "hello-vmlinux.bin" "${url}/kernels/vmlinux.bin"
-curl -fsSL -o "hello-rootfs.ext4" "${url}/rootfs/bionic.rootfs.ext4"``{{Execute}}
+First, clone the Firecracker Repository
+`git clone https://github.com/firecracker-microvm/firecracker`{{Execute}}
 
+Navigate to the firecracker root directory and build the binary:
 
-HTTP put request to socket file containing path to Linux kernel we just downloaded.
+`tools/devtool build`{{Execute}}
 
-`kernel_path=$(pwd)"/hello-vmlinux.bin"
-curl --unix-socket ./firecracker.socket -i \
-  -X PUT 'http://localhost/boot-source'   \
-  -H 'Accept: application/json'           \
-  -H 'Content-Type: application/json'     \
-  -d "{
-        \"kernel_image_path\": \"${kernel_path}\",
-        \"boot_args\": \"console=ttyS0 reboot=k panic=1 pci=off\"
-   }"`{{Execute}}
+The firecracker binary can be found under   `firecracker/build/cargo_target/x86_64-unknown-linux-musl/debug/` Navigate to the root folder, then move it there and rename it for the next step of the tutorial:
 
-
-HTTP put request to socket file containing path to root file system we just downloaded.
-
-`rootfs_path=$(pwd)"/hello-rootfs.ext4"
-curl --unix-socket ./firecracker.socket -i \
-  -X PUT 'http://localhost/drives/rootfs' \
-  -H 'Accept: application/json'           \
-  -H 'Content-Type: application/json'     \
-  -d "{
-        \"drive_id\": \"rootfs\",
-        \"path_on_host\": \"${rootfs_path}\",
-        \"is_root_device\": true,
-        \"is_read_only\": false
-   }"`{{Execute}}
-
-
-HTTP put request to start Firecracker VM.
-
-`curl --unix-socket ./firecracker.socket -i \
-  -X PUT 'http://localhost/actions'       \
-  -H  'Accept: application/json'          \
-  -H  'Content-Type: application/json'    \
-  -d '{
-      "action_type": "InstanceStart"
-   }'`{{Execute}}
+`mv firecracker/build/cargo_target/x86_64-unknown-linux-musl/debug/firecracker Firecracker`{{Execute}}
