@@ -1,6 +1,6 @@
 At this point our Firecracker microVM is ready to be started. But in order to be able to see some communication from it in our local interface (terminal 2 in Katacoda) we will use an additional API call to setup "metrics". This will show us a number of statistics for our virtual machine.
 
-First, we create a file to which the virtual machine will store the metrics. Make sure that you are still in Terminal 2 and then simply create the file with "touch".
+First, we create a file to which the virtual machine will store the metrics (it is also possible to use a fifo). Make sure that you are still in Terminal 2 and then simply create the file with "touch".
 
 `touch metrics.file`{{execute}}
 
@@ -15,6 +15,8 @@ After this we will make an HTTP API request to the /metrics path, setting up the
     }'`{{execute}}
 
 If this call returns a 204 response then everything should be in order and we can start the virtual machine. 
+
+A logger service is also provided which is setup in a very similar manner, letting the microVM log events to a local file or fifo.
 
 ## Starting the microVM
 
