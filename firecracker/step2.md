@@ -1,4 +1,4 @@
-Now it's time to actually run Firecracker. To do this, we first need to run the binary we just downloaded:
+Now it's time to actually start Firecracker itself. To do this, we first need to run the binary we just downloaded:
 
 `./Firecracker --api-sock ./firecracker.socket`{{Execute}}
 
@@ -9,11 +9,16 @@ Now Firecracker should be running, and to continue we need to open a second term
 `pwd
 ls`{{Execute}}
 
-## (WIP) Commands to start VM
+## (WIP) Commands to Configure & Start VM
+
+Downloading linux kernel and root file system:
 
 ``url="s3.amazonaws.com/spec.ccfc.min/img/quickstart_guide/`uname -m`"
 curl -fsSL -o "hello-vmlinux.bin" "${url}/kernels/vmlinux.bin"
 curl -fsSL -o "hello-rootfs.ext4" "${url}/rootfs/bionic.rootfs.ext4"``{{Execute}}
+
+
+HTTP put request to socket file containing path to Linux kernel we just downloaded.
 
 `kernel_path=$(pwd)"/hello-vmlinux.bin"
 curl --unix-socket ./firecracker.socket -i \
@@ -26,6 +31,8 @@ curl --unix-socket ./firecracker.socket -i \
    }"`{{Execute}}
 
 
+HTTP put request to socket file containing path to root file system we just downloaded.
+
 `rootfs_path=$(pwd)"/hello-rootfs.ext4"
 curl --unix-socket ./firecracker.socket -i \
   -X PUT 'http://localhost/drives/rootfs' \
@@ -37,6 +44,9 @@ curl --unix-socket ./firecracker.socket -i \
         \"is_root_device\": true,
         \"is_read_only\": false
    }"`{{Execute}}
+
+
+HTTP put request to start Firecracker VM.
 
 `curl --unix-socket ./firecracker.socket -i \
   -X PUT 'http://localhost/actions'       \

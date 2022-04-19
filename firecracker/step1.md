@@ -4,10 +4,10 @@ First off, we need to get Fireracker itself. We can do this in one of two ways. 
 
 Use the following command to get the complete binary:
 
-``release_url="https://github.com/firecracker-microvm/firecracker/releases"
-latest=$(basename $(curl -fsSLI -o /dev/null -w  %{url_effective} ${release_url}/latest))
+``url="https://github.com/firecracker-microvm/firecracker/releases"
+latest=$(basename $(curl -fsSLI -o /dev/null -w  %{url_effective} ${url}/latest))
 arch=`uname -m`
-curl -L ${release_url}/download/${latest}/firecracker-${latest}-${arch}.tgz \
+curl -L ${url}/download/${latest}/firecracker-${latest}-${arch}.tgz \
 | tar -xz``{{Execute}}
 
 Rename the binary and move it to the root folder for the next step in the tutorial:
