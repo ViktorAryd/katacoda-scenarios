@@ -17,7 +17,7 @@ Rename the binary and move it to the root folder for the next step in the tutori
 ### Option 2: Clone Repo and Build Binary (4-5 min)
 This process takes a while, so this is mainly recommended if you intend to contribute to the project yourself, or want to explore the project more thoroughly.
 
-First, clone the Firecracker Repository
+First, clone the Firecracker Repository:
 `git clone https://github.com/firecracker-microvm/firecracker`{{Execute}}
 
 Navigate to the firecracker root directory and build the binary:
